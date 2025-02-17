@@ -23,7 +23,7 @@ nav_exclude:                                            # The following paths ar
 ### Author Info ###
 author:
   name              : John Doe
-  image             : "/assets/images/san_dp.jpg"
+  image             : "portfolio/assets/images/san_dp.jpg"
   behance           : your_username
 # dribbble          : your_username
   email             : username@domain.com
