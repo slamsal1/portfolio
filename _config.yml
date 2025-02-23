@@ -19,6 +19,14 @@ nav_exclude:                                            # The following paths ar
   - pages/tags.html
   - pages/404.html
   - pages/index.md
+  - documentation/elements.html
+  - documentation/partials/01-features.md
+  - documentation/partials/02-installation.md
+  - documentation/partials/03-customization.md
+  - documentation/partials/04-adding-content.md
+  - documentation/partials/06-credits.md
+  - documentation/partials/05-dependencies.md
+  
 
 
 ### Author Info ###
@@ -99,3 +107,5 @@ exclude:
   - CONTRIBUTING.md
   - LICENSE
   - "*.log"
+  
+
