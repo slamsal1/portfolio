@@ -13,7 +13,7 @@
   --footer-bg: #FFFFFF;
   --footer-text: #2D2D2D;
   --card-bg: #FFFFFF;
-  --font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  --font-family: system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
 }
 
 /* Dark mode variables */
@@ -369,5 +369,120 @@ footer {
   
   .navbar {
     padding: 1rem;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Adjust this if needed for your layout */
+  padding: 4rem;
+}
+
+#sub-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  text-align: center;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensures the container takes up all the available width */
+  margin: auto;
+  position: relative;
+}
+
+/* Ensure that #dummy and #element do not disrupt the layout */
+#dummy {
+  display: none;
+}
+
+#element {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#element::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, #87abef, #ff758c, #f2edab);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.circle-image {
+  display: block;
+  width: 200px; /* Adjust if needed */
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.text-muted {
+  width: 100% !important;
+  margin-top: 2.5rem;
+  font-size: 3rem; /* Fluid typography */
+  font-weight: bold;
+  color: #121826 !important;
+  text-align: left;
+  display: block;
+  line-height: 1.1;
+  font-weight: 120;
+}
+
+
+/* Footer styles */
+footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  color: var(--footer-text);
+  font-size: 0.875rem; /* Set default footer font size */
+  text-align: center;
+}
+
+/* Ensure all footer texts use smaller font size */
+footer .footer-text {
+  font-size: 0.875rem; /* Smaller text for footer */
+  color: var(--footer-text);
+}
+
+footer a {
+  color: var(--footer-text);
+  text-decoration: none;
+}
+
+footer .social-links a {
+  margin: 0 0.5rem;
+  font-size: 0.875rem;
+}
+
+footer #attribution a {
+  text-decoration: underline;
+  font-size: 0.875rem;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  footer {
+    font-size: 0.75rem; /* Smaller font for small screens */
+  }
+  footer .footer-text, footer .social-links a, footer #attribution a {
+    font-size: 0.75rem;
   }
 }
