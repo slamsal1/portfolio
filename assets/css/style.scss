@@ -20,7 +20,7 @@
 [data-theme="dark"] {
   --primary-color: #FFFFFF;
   --background-color: #111111;
-  --text-color: #FFFFFF;
+  --text-color: #d8d3d3;
   --border-color: #333333;
   --accent-color: #3B82F6;
   --nav-bg: #111111;
@@ -437,7 +437,7 @@ footer {
   margin-top: 2.5rem;
   font-size: 3rem; /* Fluid typography */
   font-weight: bold;
-  color: #121826 !important;
+  color: var(--text-color) !important; /* Use a theme variable instead of hardcoded color */
   text-align: left;
   display: block;
   line-height: 1.1;
