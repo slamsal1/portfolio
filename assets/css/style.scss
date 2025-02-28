@@ -92,12 +92,11 @@ a {
   }
 }
 
-
 /* Spinning Logo */
 .logo-container {
   display: inline-block;
-  height: 50px;  /* Increased size from 40px to 50px */
-  width: 50px;   /* Increased size from 40px to 50px */
+  height: 50px;  /* Desktop size */
+  width: 50px;   /* Desktop size */
   overflow: hidden;
 }
 
@@ -144,6 +143,30 @@ a {
   100% {
     transform: rotate(360deg);
     opacity: 0.95;
+  }
+}
+
+/* Responsive adjustments for the logo */
+@media (max-width: 768px) {
+  .logo-container {
+    height: 35px;  /* Smaller size for mobile */
+    width: 35px;   /* Smaller size for mobile */
+  }
+  
+  .navbar {
+    padding: 0.75rem 1rem;  /* Reduce navbar padding on mobile */
+  }
+  
+  .navbar-brand {
+    max-width: 50%;  /* Limit brand width on mobile */
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 576px) {
+  .logo-container {
+    height: 30px;  /* Even smaller for very small screens */
+    width: 30px;
   }
 }
 
