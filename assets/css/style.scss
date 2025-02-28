@@ -73,6 +73,8 @@ a {
   border-bottom: 1px solid var(--border-color);
   
   .navbar-brand {
+    display: flex;
+    align-items: center;
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: -0.5px;
@@ -81,7 +83,7 @@ a {
   
   .nav-link {
     color: var(--nav-text) !important;
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     font-weight: 400;
     
     &:hover {
@@ -89,6 +91,63 @@ a {
     }
   }
 }
+
+
+/* Spinning Logo */
+.logo-container {
+  display: inline-block;
+  height: 50px;  /* Increased size from 40px to 50px */
+  width: 50px;   /* Increased size from 40px to 50px */
+  overflow: hidden;
+}
+
+.spinning-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform-origin: center;
+  /* Initial load animation */
+  animation: spin-logo-once 1.5s ease-in-out;
+}
+
+/* Continuous spinning on hover */
+.navbar-brand:hover .spinning-logo {
+  animation: spin-logo-continuous 3s linear infinite;
+}
+
+/* One-time spin animation for page load */
+@keyframes spin-logo-once {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+}
+
+/* Continuous spin animation for hover */
+@keyframes spin-logo-continuous {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.95;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.95;
+  }
+}
+
+
 
 /* About page styles */
 .about-intro {
