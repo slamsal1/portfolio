@@ -42,3 +42,52 @@ function getTheme() {
 function setTheme(value) {
   document.documentElement.setAttribute(THEME_ATTR, value);
 }
+
+// Animate timeline items when they come into view
+document.addEventListener('DOMContentLoaded', function() {
+  const timelineCards = document.querySelectorAll('.timeline-project-card');
+  
+  function checkScroll() {
+    timelineCards.forEach(card => {
+      const cardTop = card.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      
+      if (cardTop < windowHeight - 100) {
+        card.classList.add('animated');
+      }
+    });
+  }
+  
+  // Initial check
+  checkScroll();
+  
+  // Check on scroll
+  window.addEventListener('scroll', checkScroll);
+});
+
+
+
+
+
+
+// Animate tree project cards when they come into view
+document.addEventListener('DOMContentLoaded', function() {
+  const projectCards = document.querySelectorAll('.tree-project-card');
+  
+  function checkScroll() {
+    projectCards.forEach(card => {
+      const cardTop = card.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      
+      if (cardTop < windowHeight - 100) {
+        card.classList.add('animated');
+      }
+    });
+  }
+  
+  // Initial check
+  checkScroll();
+  
+  // Check on scroll
+  window.addEventListener('scroll', checkScroll);
+});
