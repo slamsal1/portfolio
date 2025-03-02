@@ -1,0 +1,75 @@
+/* Timeline styles */
+.timeline-section {
+    margin-bottom: 4rem;
+  }
+  
+  .timelines-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+  
+  .timeline-wrapper {
+    position: relative;
+    padding-left: 3rem;
+    margin: 2rem 0;
+  
+    &:before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-color);
+    }
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+  
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+  
+  .timeline-dot {
+    position: absolute;
+    left: -3rem;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    border: 3px solid var(--background-color);
+  }
+  
+  .timeline-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  
+  .timeline-date {
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  
+  .timeline-description {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  /* Section common styles */
+  .section {
+    padding: 4rem 0;
+    
+    .section-title {
+      font-size: 5rem;
+      margin-bottom: 2rem;
+      color: var(--text-color);
+    }
+  }

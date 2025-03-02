@@ -1,0 +1,140 @@
+/* Project Flow Container */
+.project-flow-container {
+    position: relative;
+    width: 100%;
+    margin: 40px 0;
+    padding: 20px 0;
+  }
+  
+  /* Central project flow line */
+  .project-flow-container::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: #e0e0e0;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    z-index: 0;
+  }
+  
+  /* Project cards container */
+  .project-flow-items {
+    position: relative;
+  }
+  
+  /* Project flow item */
+  .project-flow-item {
+    position: relative;
+    margin-bottom: 70px;
+    width: 100%;
+  }
+  
+  /* Clear floats */
+  .project-flow-item::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  
+  /* Left side project cards */
+  .project-flow-item:nth-child(odd) .project-flow-card {
+    float: left;
+    left: 0;
+  }
+  
+  /* Right side project cards */
+  .project-flow-item:nth-child(even) .project-flow-card {
+    float: right;
+    right: 0;
+  }
+  
+  /* Project card for project flow */
+  .project-flow-card {
+    position: relative;
+    width: 45%;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover effect */
+  .project-flow-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+  
+  /* Project flow circles/dots */
+  .project-flow-item .timeline-dot {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 4px solid #3498db;
+    top: 50%;
+    border-radius: 50%;
+    z-index: 1;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+  }
+  
+  /* Branch lines connecting to center flow */
+  .project-flow-item .timeline-branch {
+    position: absolute;
+    height: 2px;
+    background-color: #e0e0e0;
+    top: 50%;
+    z-index: 0;
+  }
+  
+  /* Left branch */
+  .project-flow-item:nth-child(odd) .timeline-branch {
+    right: 50%;
+    width: 5%;
+  }
+  
+  /* Right branch */
+  .project-flow-item:nth-child(even) .timeline-branch {
+    left: 50%;
+    width: 5%;
+  }
+  
+  /* Card styling */
+  .project-flow-card .card-body {
+    padding: 15px;
+  }
+  
+  /* Card image styling */
+  .project-flow-card .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .project-flow-card {
+      width: 80%;
+      float: right !important;
+      margin-right: 10%;
+    }
+    
+    .project-flow-container::after {
+      left: 10%;
+    }
+    
+    .project-flow-item .timeline-dot {
+      left: 10%;
+    }
+    
+    .project-flow-item .timeline-branch {
+      left: 10% !important;
+      width: 10% !important;
+      right: auto !important;
+    }
+  }

@@ -1,0 +1,44 @@
+/* Profile elements */
+#dummy {
+    display: none;
+  }
+  
+  #element {
+    position: relative;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #element::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(135deg, #87abef, #ff758c, #f2edab);
+    border-radius: 50%;
+    z-index: -1;
+  }
+  
+  .circle-image {
+    display: block;
+    width: 200px; /* Adjust if needed */
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .text-muted {
+    width: 100% !important;
+    margin-top: 2.5rem;
+    font-size: 3rem; /* Fluid typography */
+    font-weight: bold;
+    color: var(--text-color) !important; /* Use a theme variable instead of hardcoded color */
+    text-align: left;
+    display: block;
+    line-height: 1.1;
+    font-weight: 120;
+  }

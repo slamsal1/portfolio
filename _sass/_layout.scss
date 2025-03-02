@@ -1,0 +1,56 @@
+/* Animations */
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .about-title {
+      font-size: 2rem;
+    }
+    
+    .about-greeting {
+      font-size: 1.25rem;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+    }
+    
+    .timelines-container {
+      gap: 2rem;
+    }
+    
+    .navbar {
+      padding: 1rem;
+    }
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Adjust this if needed for your layout */
+    padding: 4rem;
+  }
+  
+  #sub-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    text-align: center;
+  }
+  
+  #container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ensures the container takes up all the available width */
+    margin: auto;
+    position: relative;
+  }

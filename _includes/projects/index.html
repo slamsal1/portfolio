@@ -1,71 +1,59 @@
-<div class="tree-projects-container">
-  <!-- Your custom SVG for the trunk and branches -->
-  <div class="tree-svg-container">
-    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 277.5 94.5">
-      <defs>
-        <style>
-          .cls-1 {
-            fill: #fff;
-            stroke: #000;
-            stroke-miterlimit: 10;
-          }
-        </style>
-      </defs>
-      <path class="cls-1" d="M0,94h277.5"/>
-      <line class="cls-1" x1="144" x2="144" y2="94"/>
-    </svg>
-  </div>
-  
-  <div class="tree-projects">
+<!-- Project Flow Container -->
+<div class="project-flow-container">
+  <div class="project-flow-items">
+    
     <!-- Remote Projects -->
     {% for remote_project in page.remote_projects %}
-      {% for repo in site.github.public_repositories %}
-        {% if remote_project == repo.name %}
-          {% assign project = repo %}
-          {% assign words = project.name | split: '-' %}
+      {%- for repo in site.github.public_repositories -%}
+        {%- if remote_project == repo.name -%}
+          {%- assign project = repo -%}
+          {%- assign words = project.name | split: '-' -%}
           
-          {% capture titlecase %}
-            {% for word in words %}
+          {%- capture titlecase -%}
+            {%- for word in words -%}
               {{ word | capitalize | append: ' ' }}
-            {% endfor %}
-          {% endcapture %}
-
-          {% assign project_type  = "remote" %}
-          {% assign project_id    = project.name %}
-          {% assign project_img   = false %}
-          {% assign project_name  = titlecase | strip %}
-          {% assign project_desc  = project.description %}
-          {% assign project_url   = project.html_url %}
-          {% assign project_tools = project.topics %}
-          {% assign external      = true %}
-          {% assign position      = forloop.index %}
-
-          {% include projects/tree-project-card.html %}
-        {% endif %}
-      {% endfor %}
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- assign project_type  = "remote" -%}
+          {%- assign project_id    = project.name -%}
+          {%- assign project_img   = false -%}
+          {%- assign project_name  = titlecase | strip -%}
+          {%- assign project_desc  = project.description -%}
+          {%- assign project_url   = project.html_url -%}
+          {%- assign project_tools = project.topics -%}
+          {%- assign external      = true -%}
+          <!-- Project Flow Item -->
+          <div class="project-flow-item wow animated fadeIn" data-wow-delay=".15s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-branch"></div>
+            {% include projects/timeline-project-card.html %}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
     {% endfor %}
-
+    
     <!-- Local Projects -->
-    {% assign project_count = 0 %}
     {% for project in site.projects %}
-      {% assign project_count = project_count | plus: 1 %}
-      {% assign project_type  = "local" %}
-      {% assign project_id    = project.name | slugify %}
-      {% assign project_img   = project.image %}
-      {% assign project_name  = project.name %}
-      {% assign project_desc  = project.description %}
-      {% assign project_tools = project.tools %}
-      {% assign position      = project_count %}
-
-      {% if project.external_url %}
-        {% assign project_url = project.external_url %}
-        {% assign external    = true %}
-      {% else %}
-        {% assign project_url = project.url | relative_url %}
-        {% assign external    = false %}
-      {% endif %}
-
-      {% include projects/tree-project-card.html %}
+      {%- assign project_type  = "local" -%}
+      {%- assign project_id    = project.name | slugify -%}
+      {%- assign project_img   = project.image -%}
+      {%- assign project_name  = project.name -%}
+      {%- assign project_desc  = project.description -%}
+      {%- assign project_tools = project.tools -%}
+      {%- if project.external_url -%}
+        {%- assign project_url = project.external_url -%}
+        {%- assign external    = true -%}
+      {%- else -%}
+        {%- assign project_url = project.url | relative_url -%}
+        {%- assign external    = false -%}
+      {%- endif -%}
+      <!-- Project Flow Item -->
+      <div class="project-flow-item wow animated fadeIn" data-wow-delay=".15s">
+        <div class="timeline-dot"></div>
+        <div class="timeline-branch"></div>
+        {% include projects/project-flow-card.html %}
+      </div>
     {% endfor %}
+    
   </div>
 </div>

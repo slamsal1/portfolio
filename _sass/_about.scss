@@ -1,0 +1,88 @@
+/* About page styles */
+.about-intro {
+    margin-bottom: 4rem;
+    
+    .about-title {
+      font-size: 2.5rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    
+    .about-greeting {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      
+      .highlight {
+        color: var(--accent-color);
+        font-weight: 500;
+      }
+      
+      .wave {
+        display: inline-block;
+        animation: wave 2s ease-in-out infinite;
+      }
+    }
+  }
+  
+  /* Skills section */
+  .skills-section {
+    margin-bottom: 4rem;
+    font-size: 1rem;
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    
+  }
+  .skills-grid h2 {
+      font-size:1.25rem;
+    }
+    
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  
+  .skill-item {
+    .skill-tag {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+      }
+      
+      &.primary {
+        background-color: var(--border-color);
+        color: var(--text-color);
+      }
+      
+      &.info {
+        background-color: rgba(0, 102, 255, 0.1);
+        color: var(--accent-color);
+      }
+      
+      &.success {
+        background-color: var(--border-color);
+        color: var(--text-color);
+      }
+      
+      &.danger {
+        background-color: var(--border-color);
+        color: var(--text-color);
+      }
+      
+      &.warning {
+        background-color: var(--border-color);
+        color: var(--text-color);
+      }
+    }
+  }

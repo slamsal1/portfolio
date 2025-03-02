@@ -1,0 +1,78 @@
+/* Footer */
+footer {
+    background: var(--footer-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    color: var(--footer-text);
+    
+    .social-links {
+      a {
+        color: var(--footer-text);
+        margin: 0 1rem;
+        font-size: 0.9rem;
+        text-decoration: none;
+        
+        &:hover {
+          color: var(--accent-color);
+        }
+      }
+    }
+  }
+  
+  /* Dark mode overrides */
+  [data-theme="dark"] {
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+    
+    img {
+      filter: brightness(0.8) contrast(1.2);
+    }
+    
+    .timeline-dot {
+      border-color: var(--background-color);
+    }
+  }
+  
+  /* Footer styles (extended) */
+  footer {
+    background: var(--footer-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    color: var(--footer-text);
+    font-size: 0.875rem; /* Set default footer font size */
+    text-align: center;
+  }
+  
+  /* Ensure all footer texts use smaller font size */
+  footer .footer-text {
+    font-size: 0.875rem; /* Smaller text for footer */
+    color: var(--footer-text);
+  }
+  
+  footer a {
+    color: var(--footer-text);
+    text-decoration: none;
+  }
+  
+  footer .social-links a {
+    margin: 0 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  footer #attribution a {
+    text-decoration: underline;
+    font-size: 0.875rem;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    footer {
+      font-size: 0.75rem; /* Smaller font for small screens */
+    }
+    footer .footer-text, footer .social-links a, footer #attribution a {
+      font-size: 0.75rem;
+    }
+  }

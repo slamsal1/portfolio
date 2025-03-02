@@ -1,0 +1,29 @@
+/* Theme variables */
+:root {
+    /* Light mode variables */
+    --primary-color: #2D2D2D;
+    --background-color: #FFFFFF;
+    --text-color: #2D2D2D;
+    --border-color: #EEEEEE;
+    --accent-color: #0066FF;
+    --nav-bg: #FFFFFF;
+    --nav-text: #2D2D2D;
+    --footer-bg: #FFFFFF;
+    --footer-text: #2D2D2D;
+    --card-bg: #FFFFFF;
+    --font-family: system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+  }
+  
+  /* Dark mode variables */
+  [data-theme="dark"] {
+    --primary-color: #FFFFFF;
+    --background-color: #111111;
+    --text-color: #d8d3d3;
+    --border-color: #333333;
+    --accent-color: #3B82F6;
+    --nav-bg: #111111;
+    --nav-text: #FFFFFF;
+    --footer-bg: #111111;
+    --footer-text: #FFFFFF;
+    --card-bg: #111111;
+  }
