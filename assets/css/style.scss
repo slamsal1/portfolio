@@ -2,42 +2,42 @@
 ---
 /* Theme variables */
 
-@use "themes" as *;
+@import "theme_variables"; 
 /* Import Project Flow */
-@use "project_flow";
+@import "project_flow";
 
 /* Import the external theme */
-@use "portfolYOU";
+@import "portfolYOU";
 
 /* Import the project timeline specific styles */
-@use "project_timeline";
+@import "project_timeline";
 
 /* Global styles */
-@use "global";
+@import "global";
 
 /* Typography */
-@use "typography";
+@import "typography";
 
 /* Navbar and logo */
-@use "navbar";
+@import "navbar";
 
 /* About page and skills */
-@use "about";
+@import "about";
 
 /* Timeline */
-@use "timeline";
+@import "timeline";
 
 /* Cards and blog */
-@use "cards";
+@import "cards";
 
 /* Footer */
-@use "footer";
+@import "footer";
 
 /* Layout */
-@use "layout";
+@import "layout";
 
 /* Profile */
-@use "profile";
+@import "profile";
 
 /* Responsive styles */
-@use "responsive";
+@import "responsive";
