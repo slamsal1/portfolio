@@ -60,3 +60,32 @@
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
   }
+
+  .project-card {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+    visibility: visible;
+    
+    &.hidden {
+      opacity: 0;
+      transform: translateY(0);
+      display: none;
+      visibility: hidden;
+      height: 0;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  
+  .project-container {
+    min-height: 300px;
+    position: relative;
+  }
+
+  // Override any existing scroll-based animations
+  .wow {
+    visibility: visible !important;
+    animation: none !important;
+  }

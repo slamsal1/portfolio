@@ -130,47 +130,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Filter functionality
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-      // Update active button
+      // Remove active class from all buttons
       filterButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
       button.classList.add('active');
       
       const selectedCategory = button.getAttribute('data-category');
-      console.log("Selected category:", selectedCategory); // Debug output
       
-      // Filter projects
       projectItems.forEach(item => {
-        const itemCategory = item.getAttribute('data-category');
-        console.log("Checking item category:", itemCategory); // Debug output
+        // Force a reflow to ensure animations work
+        item.offsetHeight;
         
+        const itemCategory = item.getAttribute('data-category');
         if (selectedCategory === 'filter-all' || selectedCategory === itemCategory) {
-          item.style.display = 'block';
           item.classList.remove('hidden');
         } else {
-          item.style.display = 'none';
           item.classList.add('hidden');
         }
-      });    
-      // Give a slight delay to allow animations to complete
-      setTimeout(() => {
-        // Recalculate positions for visible items
-        const visibleItems = document.querySelectorAll('.project-flow-item:not(.hidden)');
-        
-        // Maintain alternating pattern for visible items
-        visibleItems.forEach((item, index) => {
-          // Remove any existing odd/even classes
-          item.classList.remove('odd-item', 'even-item');
-          
-          // Add appropriate class based on visible index
-          if (index % 2 === 0) {
-            item.classList.add('odd-item');
-          } else {
-            item.classList.add('even-item');
-          }
-        });
-      }, 400);
+      });
     });
   });
-  
   // Initial layout setup
   projectItems.forEach((item, index) => {
     if (index % 2 === 0) {
@@ -210,5 +189,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const count = parseInt(badge.textContent);
     badge.textContent = '0';
     animateCount(badge, count);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectItems = document.querySelectorAll('.project-card');
+
+  // Disable any existing scroll observers
+  if (window.scrollObserver) {
+    window.scrollObserver.disconnect();
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
+      button.classList.add('active');
+      
+      const selectedCategory = button.getAttribute('data-category');
+      
+      projectItems.forEach(item => {
+        // Reset any scroll-based classes
+        item.classList.remove('wow', 'fadeIn');
+        
+        const itemCategory = item.getAttribute('data-category');
+        if (selectedCategory === 'filter-all' || selectedCategory === itemCategory) {
+          item.classList.remove('hidden');
+          // Force immediate display
+          requestAnimationFrame(() => {
+            item.style.display = 'block';
+            item.style.opacity = '1';
+          });
+        } else {
+          item.classList.add('hidden');
+          item.style.display = 'none';
+        }
+      });
+
+      // Force layout recalculation
+      window.dispatchEvent(new Event('resize'));
+    });
   });
 });
