@@ -45,7 +45,7 @@ function setTheme(value) {
 
 // Animate timeline items when they come into view
 document.addEventListener('DOMContentLoaded', function() {
-  const timelineCards = document.querySelectorAll('.timeline-project-card');
+  const timelineCards = document.querySelectorAll('.project-flow-card');
   
   function checkScroll() {
     timelineCards.forEach(card => {
@@ -90,4 +90,125 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Check on scroll
   window.addEventListener('scroll', checkScroll);
+});
+
+
+// Filtering Logic
+document.addEventListener("DOMContentLoaded", () => {
+  "use strict";
+  
+  /**
+   * Project Category Filter
+   */
+  const filterButtons = document.querySelectorAll('.project-filters button');
+  const projectItems = document.querySelectorAll('.project-flow-item');
+  
+  // Count projects by category
+  const categoryCounts = {
+    student: 0,
+    freelance: 0,
+    personal: 0,
+    employment: 0,
+    all: projectItems.length
+  };
+  
+  // Initialize category counts
+  projectItems.forEach(item => {
+    const category = item.getAttribute('data-category');
+    if (category) {
+      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+    }
+  });
+  
+  // Update count badges
+  document.querySelector('.all-count').textContent = categoryCounts.all;
+  document.querySelector('.student-count').textContent = categoryCounts.student || 0;
+  document.querySelector('.freelance-count').textContent = categoryCounts.freelance || 0;
+  document.querySelector('.personal-count').textContent = categoryCounts.personal || 0;
+  document.querySelector('.employment-count').textContent = categoryCounts.employment || 0;
+  
+  // Filter functionality
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Update active button
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      
+      const selectedCategory = button.getAttribute('data-category');
+      console.log("Selected category:", selectedCategory); // Debug output
+      
+      // Filter projects
+      projectItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        console.log("Checking item category:", itemCategory); // Debug output
+        
+        if (selectedCategory === 'filter-all' || selectedCategory === itemCategory) {
+          item.style.display = 'block';
+          item.classList.remove('hidden');
+        } else {
+          item.style.display = 'none';
+          item.classList.add('hidden');
+        }
+      });    
+      // Give a slight delay to allow animations to complete
+      setTimeout(() => {
+        // Recalculate positions for visible items
+        const visibleItems = document.querySelectorAll('.project-flow-item:not(.hidden)');
+        
+        // Maintain alternating pattern for visible items
+        visibleItems.forEach((item, index) => {
+          // Remove any existing odd/even classes
+          item.classList.remove('odd-item', 'even-item');
+          
+          // Add appropriate class based on visible index
+          if (index % 2 === 0) {
+            item.classList.add('odd-item');
+          } else {
+            item.classList.add('even-item');
+          }
+        });
+      }, 400);
+    });
+  });
+  
+  // Initial layout setup
+  projectItems.forEach((item, index) => {
+    if (index % 2 === 0) {
+      item.classList.add('odd-item');
+    } else {
+      item.classList.add('even-item');
+    }
+  });
+  /**
+   * Animated counting for filter counts
+   */
+  function animateCount(element, target) {
+    const duration = 1000;
+    const start = 0;
+    const startTime = performance.now();
+    
+    function updateCount(currentTime) {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      const easeProgress = progress * (2 - progress); // Ease out
+      const currentCount = Math.floor(start + (target * easeProgress));
+      
+      element.textContent = currentCount;
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        element.textContent = target;
+      }
+    }
+    
+    requestAnimationFrame(updateCount);
+  }
+  
+  // Animate the count badges when page loads
+  document.querySelectorAll('.filter-count').forEach(badge => {
+    const count = parseInt(badge.textContent);
+    badge.textContent = '0';
+    animateCount(badge, count);
+  });
 });

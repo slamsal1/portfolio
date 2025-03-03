@@ -1,3 +1,27 @@
+<!-- Project Category Filters -->
+<div class="project-filters wow animated fadeIn" data-wow-delay=".1s">
+  <button type="button" class="filter-btn active" data-category="filter-all">
+    All Projects
+    <span class="filter-count all-count">0</span>
+  </button>
+  <button type="button" class="filter-btn" data-category="student">
+    Student Projects
+    <span class="filter-count student-count">0</span>
+  </button>
+  <button type="button" class="filter-btn" data-category="freelance">
+    Freelance Work
+    <span class="filter-count freelance-count">0</span>
+  </button>
+  <button type="button" class="filter-btn" data-category="personal">
+    Personal Projects
+    <span class="filter-count personal-count">0</span>
+  </button>
+  <button type="button" class="filter-btn" data-category="employment">
+    Employment Projects
+    <span class="filter-count employment-count">0</span>
+  </button>
+</div>
+
 <!-- Project Flow Container -->
 <div class="project-flow-container">
   <div class="project-flow-items">
@@ -22,8 +46,9 @@
           {%- assign project_url   = project.html_url -%}
           {%- assign project_tools = project.topics -%}
           {%- assign external      = true -%}
+          {%- assign project_category = repo.category | default: "personal" -%}
           <!-- Project Flow Item -->
-          <div class="project-flow-item wow animated fadeIn" data-wow-delay=".15s">
+          <div class="project-flow-item wow animated fadeIn" data-wow-delay=".15s" data-category="{{ project_category }}">
             <div class="timeline-dot"></div>
             <div class="timeline-branch"></div>
             {% include projects/timeline-project-card.html %}
@@ -40,6 +65,7 @@
       {%- assign project_name  = project.name -%}
       {%- assign project_desc  = project.description -%}
       {%- assign project_tools = project.tools -%}
+      {%- assign project_category = project.category | default: "personal" -%}
       {%- if project.external_url -%}
         {%- assign project_url = project.external_url -%}
         {%- assign external    = true -%}
@@ -48,7 +74,7 @@
         {%- assign external    = false -%}
       {%- endif -%}
       <!-- Project Flow Item -->
-      <div class="project-flow-item wow animated fadeIn" data-wow-delay=".15s">
+      <div class="project-flow-item wow animated fadeIn" data-wow-delay=".15s" data-category="{{ project_category }}">
         <div class="timeline-dot"></div>
         <div class="timeline-branch"></div>
         {% include projects/project-flow-card.html %}
