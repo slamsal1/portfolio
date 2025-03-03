@@ -62,20 +62,19 @@
   }
 
   .project-card {
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease;
     opacity: 1;
-    transform: translateY(0);
-    display: block;
-    visibility: visible;
+    width: 100%;
+    height: auto;
+    margin: 0;
     
     &.hidden {
-      opacity: 0;
-      transform: translateY(0);
       display: none;
-      visibility: hidden;
+      grid-column: unset;
       height: 0;
       margin: 0;
       padding: 0;
+      opacity: 0;
     }
   }
   
@@ -89,3 +88,17 @@
     visibility: visible !important;
     animation: none !important;
   }
+
+.projects-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+// Ensure proper responsive behavior
+@media (max-width: 768px) {
+  .projects-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
