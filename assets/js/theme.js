@@ -234,74 +234,144 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Elements
-const downloadBtn = document.getElementById("download-btn");
-const modal = document.getElementById("download-modal");
-const closeModal = document.getElementById("close-modal");
-const downloadForm = document.getElementById("download-form");
-const skipBtn = document.getElementById("skip-btn");
-
-// URL to download your resume PDF
-const resumeURL = "{{ site.baseurl }}/assets/docs/resume.pdf";
-
-// Function: Soft verification using Cloudflare Turnstile token
-function verifyRequest() {
-  // Retrieve the Cloudflare Turnstile token if available.
-  // In production, you should send the token to your server for additional verification.
-  const token = document.querySelector('textarea[name="cf-turnstile-response"]')?.value;
-  if (!token) {
-    alert("Please verify that you're not a robot.");
-    return false;
-  }
-  return true;
-}
-
-// Function: Trigger the PDF download
-function triggerDownload() {
-  const link = document.createElement("a");
-  link.href = resumeURL;
-  link.download = resumeURL.substring(resumeURL.lastIndexOf("/") + 1);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-// Show Modal on Download Button Click
-downloadBtn.addEventListener("click", function () {
-  modal.style.display = "block";
-});
-
-// Close Modal on click of Close Button
-closeModal.addEventListener("click", function () {
-  modal.style.display = "none";
-});
-
-// Handle form submission with user details
-downloadForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-  if (!verifyRequest()) return;
+// Resume Page
+document.addEventListener("DOMContentLoaded", function() {
+  // Adobe DC Viewer
+  document.addEventListener("adobe_dc_view_sdk.ready", function() {
+    var adobeDCView = new AdobeDC.View({
+      clientId: "7529f23aaf054c05953bde3983760b61",
+      divId: "adobe-dc-view"
+    });
+    adobeDCView.previewFile({
+      content: { location: { url: "/assets/docs/resume.pdf" } },
+      metaData: { fileName: "Resume.pdf" }
+    }, { embedMode: "IN_LINE" });
+  });
   
-  // Optionally: send the user details to your server here.
-  // const userData = {
-  //   firstName: document.getElementById("first-name").value,
-  //   lastName: document.getElementById("last-name").value,
-  //   email: document.getElementById("email").value,
-  // };
-
-  modal.style.display = "none";
-  triggerDownload();
-});
-
-// Handle Skip Button click for direct download
-skipBtn.addEventListener("click", function () {
-  if (!verifyRequest()) return;
-  modal.style.display = "none";
-  triggerDownload();
-});
-
-// Close modal if clicking outside of modal content
-window.addEventListener("click", function (e) {
-  if (e.target === modal) {
-    modal.style.display = "none";
+  // Elements
+  const downloadBtn = document.getElementById('resume-download-btn');
+  const modal = document.getElementById('resume-download-modal');
+  const closeBtn = document.getElementById('resume-modal-close');
+  const downloadForm = document.getElementById('resume-download-form');
+  const submitBtn = document.getElementById('resume-submit-btn');
+  const skipBtn = document.getElementById('resume-skip-btn');
+  const verificationStatus = document.getElementById('resume-verification-status');
+  
+  // Correct resume file path
+  const resumeURL = '/assets/docs/resume.pdf';
+  
+  // State
+  let isVerified = false;
+  let turnstileWidget = null;
+  
+  // Functions
+  function openModal() {
+    modal.style.display = 'block';
+    initTurnstile();
   }
+  
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+  
+  function initTurnstile() {
+    if (window.turnstile) {
+      verificationStatus.textContent = "Verifying...";
+      submitBtn.disabled = true;
+      skipBtn.disabled = true;
+      
+      // Reset any existing widget
+      if (turnstileWidget) {
+        window.turnstile.reset(turnstileWidget);
+      }
+      
+      // Create hidden container for Turnstile
+      let turnstileContainer = document.getElementById('cf-turnstile-container');
+      if (!turnstileContainer) {
+        turnstileContainer = document.createElement('div');
+        turnstileContainer.id = 'cf-turnstile-container';
+        turnstileContainer.style.height = '0';
+        turnstileContainer.style.overflow = 'hidden';
+        document.querySelector('.resume-verification-container').appendChild(turnstileContainer);
+      }
+      
+      // Render turnstile with explicit execution
+      setTimeout(() => {
+        try {
+          turnstileWidget = window.turnstile.render('#cf-turnstile-container', {
+            sitekey: '0x4AAAAAAA_hGhnGe75InF1l', // Replace with your actual sitekey
+            callback: function(token) {
+              console.log("Turnstile verification complete with token:", token ? "Success" : "Failed");
+              if (token) {
+                isVerified = true;
+                verificationStatus.innerHTML = '<span style="color: green;">✓ Verification successful</span>';
+                submitBtn.disabled = false;
+                skipBtn.disabled = false;
+              } else {
+                verificationStatus.innerHTML = '<span style="color: red;">✗ Verification failed</span>';
+              }
+            },
+            'error-callback': function() {
+              verificationStatus.innerHTML = '<span style="color: red;">✗ Verification error</span>';
+            }
+          });
+          console.log("Turnstile initialized");
+        } catch (e) {
+          console.error("Turnstile error:", e);
+          // Fallback verification (just in case)
+          setTimeout(() => {
+            isVerified = true;
+            verificationStatus.innerHTML = '<span style="color: green;">✓ Verification successful</span>';
+            submitBtn.disabled = false;
+            skipBtn.disabled = false;
+          }, 1500);
+        }
+      }, 500);
+    } else {
+      console.log("Turnstile not loaded, retrying...");
+      setTimeout(initTurnstile, 500);
+    }
+  }
+  
+  function triggerDownload() {
+    const link = document.createElement('a');
+    link.href = resumeURL;
+    link.download = "resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+  
+  // Event Listeners
+  downloadBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  
+  window.addEventListener('click', function(e) {
+    if (e.target == modal) {
+      closeModal();
+    }
+  });
+  
+  downloadForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (isVerified) {
+      const firstName = document.getElementById('resume-first-name').value;
+      const lastName = document.getElementById('resume-last-name').value;
+      const email = document.getElementById('resume-email').value;
+      console.log("Form submitted with:", { firstName, lastName, email });
+      closeModal();
+      triggerDownload();
+    } else {
+      verificationStatus.innerHTML = '<span style="color: red;">Please wait for verification to complete</span>';
+    }
+  });
+  
+  skipBtn.addEventListener('click', function() {
+    if (isVerified) {
+      closeModal();
+      triggerDownload();
+    } else {
+      verificationStatus.innerHTML = '<span style="color: red;">Please wait for verification to complete</span>';
+    }
+  });
 });

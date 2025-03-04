@@ -1,49 +1,57 @@
 <div class="container-fluid justify-content-center">
     <!-- Adobe DC Viewer Container -->
     <div id="adobe-dc-view" style="width: 100%; height: 100vh;"></div>
-  
-    <!-- Resume Download Button -->
-    <div class="download-section text-center">
-      <button id="download-btn">Download Resume</button>
+    <!-- Simple Download Button at the top of the page -->
+    <div class="resume-download-container">
+      <button id="resume-download-btn" class="resume-download-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+        </svg>
+        Download Resume
+      </button>
     </div>
-  
-    <!-- Modal for Download with Details -->
-    <div id="download-modal" class="modal">
-      <div class="modal-content">
-        <button id="close-modal" class="close-modal">&times;</button>
-        <h2>Download Resume</h2>
-        <form id="download-form">
-          <input type="text" id="first-name" name="firstName" placeholder="First Name" />
-          <input type="text" id="last-name" name="lastName" placeholder="Last Name" />
-          <input type="email" id="email" name="email" placeholder="Email" />
-  
-          <!-- Cloudflare Turnstile Widget for soft verification -->
-          <div class="turnstile-container">
-            <!-- Replace data-sitekey with your actual Cloudflare Turnstile site key -->
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAA_hGhnGe75InF1l"></div>
-          </div>
-  
-          <button type="submit">Submit &amp; Download</button>
-          <button type="button" id="skip-btn">Skip &amp; Download</button>
-        </form>
+    <!-- Download Modal -->
+    <div id="resume-download-modal" class="resume-modal" style="display: none;">
+      <div class="resume-modal-content">
+        <div class="resume-modal-header">
+          <h3>Download Resume</h3>
+          <button type="button" class="resume-modal-close" id="resume-modal-close">&times;</button>
+        </div>
+        <div class="resume-modal-body">
+          <p>Please provide your details to download the resume.</p>
+          <form id="resume-download-form">
+            <div class="resume-form-group">
+              <div class="resume-form-row">
+                <div class="resume-form-col">
+                  <label for="resume-first-name">First Name</label>
+                  <input type="text" id="resume-first-name" placeholder="First Name">
+                </div>
+                <div class="resume-form-col">
+                  <label for="resume-last-name">Last Name</label>
+                  <input type="text" id="resume-last-name" placeholder="Last Name">
+                </div>
+              </div>
+              <div class="resume-form-row">
+                <div class="resume-form-col full-width">
+                  <label for="resume-email">Email</label>
+                  <input type="email" id="resume-email" placeholder="Email Address">
+                </div>
+              </div>
+            </div>
+            <div class="resume-verification-container">
+              <div id="resume-verification-status">Verifying...</div>
+            </div>
+            <div class="resume-form-actions">
+              <button type="submit" id="resume-submit-btn" disabled>Submit & Download</button>
+              <button type="button" id="resume-skip-btn" disabled>Skip & Download</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  
-    <!-- Adobe DC View SDK -->
-    <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
-    <script type="text/javascript">
-      document.addEventListener("adobe_dc_view_sdk.ready", function () {
-        var adobeDCView = new AdobeDC.View({
-          clientId: "7529f23aaf054c05953bde3983760b61",
-          divId: "adobe-dc-view"
-        });
-        adobeDCView.previewFile({
-          content: { location: { url: "{{ site.baseurl }}/assets/docs/resume.pdf" } },
-          metaData: { fileName: "Resume.pdf" }
-        }, { embedMode: "IN_LINE" });
-      });
-    </script>
-  
-    <!-- Cloudflare Turnstile API -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   </div>
+  <!-- Adobe DC View SDK -->
+  <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
+  <!-- Cloudflare Turnstile API -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>

@@ -1,97 +1,165 @@
-/* Adobe DC viewer & general container styles */
-#adobe-dc-view,
 .pdf-container {
-  background: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #f5f5f5;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Download Button Styling */
-.download-section {
-  text-align: center;
-  margin-top: 20px;
-}
-#download-btn {
-  padding: 12px 24px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff; /* Change to match your site's theme */
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-#download-btn:hover {
-  background-color: #0069d9;
-}
-
-/* Modal Overlay */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 400px;
-  position: relative;
-}
-.modal-content h2 {
-  margin-top: 0;
-}
-.modal-content input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.modal-content button {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-.modal-content button:hover {
-  background-color: #0069d9;
-}
-
-/* Close Modal Button */
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Cloudflare Turnstile Container */
-.turnstile-container {
-  margin: 15px 0;
-  text-align: center;
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .pdf-container {
-    padding-bottom: 150% !important;
-  }
+    .pdf-container {
+        padding-bottom: 150% !important;
+    }
 }
+
+.resume-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.resume-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+#adobe-dc-view {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+
+
+
+//Download button
+
+/* Download button */
+.resume-download-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+  }
+  .resume-download-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: #3a7bd5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .resume-download-btn:hover {
+    background-color: #2a5db2;
+  }
+  /* Modal */
+  .resume-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .resume-modal-content {
+    background-color: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  .resume-modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .resume-modal-header h3 {
+    margin: 0;
+  }
+  .resume-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .resume-modal-body {
+    padding: 20px;
+  }
+  /* Form */
+  .resume-form-group {
+    margin-bottom: 20px;
+  }
+  .resume-form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  .resume-form-col {
+    flex: 1;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .resume-form-col label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .resume-form-col input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .resume-verification-container {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .resume-form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .resume-form-actions button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .resume-form-actions button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .resume-form-actions button[type="submit"] {
+    background-color: #3a7bd5;
+    color: white;
+  }
+  .resume-form-actions button[type="button"] {
+    background-color: #f1f1f1;
+    color: #333;
+  }
+  @media (max-width: 768px) {
+    .resume-form-row {
+      flex-direction: column;
+    }
+  }
