@@ -5,4 +5,4 @@ permalink: /resume/
 weight: 4
 ---
 
-{% include resume/resume.html %}
+{% include resume/adobe_viewer.html %}
