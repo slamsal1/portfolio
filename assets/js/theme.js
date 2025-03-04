@@ -233,3 +233,75 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// Elements
+const downloadBtn = document.getElementById("download-btn");
+const modal = document.getElementById("download-modal");
+const closeModal = document.getElementById("close-modal");
+const downloadForm = document.getElementById("download-form");
+const skipBtn = document.getElementById("skip-btn");
+
+// URL to download your resume PDF
+const resumeURL = "{{ site.baseurl }}/assets/docs/resume.pdf";
+
+// Function: Soft verification using Cloudflare Turnstile token
+function verifyRequest() {
+  // Retrieve the Cloudflare Turnstile token if available.
+  // In production, you should send the token to your server for additional verification.
+  const token = document.querySelector('textarea[name="cf-turnstile-response"]')?.value;
+  if (!token) {
+    alert("Please verify that you're not a robot.");
+    return false;
+  }
+  return true;
+}
+
+// Function: Trigger the PDF download
+function triggerDownload() {
+  const link = document.createElement("a");
+  link.href = resumeURL;
+  link.download = resumeURL.substring(resumeURL.lastIndexOf("/") + 1);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// Show Modal on Download Button Click
+downloadBtn.addEventListener("click", function () {
+  modal.style.display = "block";
+});
+
+// Close Modal on click of Close Button
+closeModal.addEventListener("click", function () {
+  modal.style.display = "none";
+});
+
+// Handle form submission with user details
+downloadForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  if (!verifyRequest()) return;
+  
+  // Optionally: send the user details to your server here.
+  // const userData = {
+  //   firstName: document.getElementById("first-name").value,
+  //   lastName: document.getElementById("last-name").value,
+  //   email: document.getElementById("email").value,
+  // };
+
+  modal.style.display = "none";
+  triggerDownload();
+});
+
+// Handle Skip Button click for direct download
+skipBtn.addEventListener("click", function () {
+  if (!verifyRequest()) return;
+  modal.style.display = "none";
+  triggerDownload();
+});
+
+// Close modal if clicking outside of modal content
+window.addEventListener("click", function (e) {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
