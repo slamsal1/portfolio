@@ -54,9 +54,9 @@
   
   /* Download button */
   .resume-download-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
+    position: absolute; // Change from fixed to absolute
+    top: 20px;         // Position from top instead of bottom
+    right: 48px; // Changed from 20px to 48px (roughly the width of the button)
     z-index: 100;
   }
   
@@ -67,14 +67,14 @@
     width: 56px;
     height: 56px;
     padding: 0;
-    background-color: rgba(58, 123, 213, 0.7);
+    background-color: rgba(58, 123, 213, 0.9); // Make slightly more opaque
     color: white;
     border: none;
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-    opacity: 0.6;
+    opacity: 0.8; // Increase default opacity
   }
   
   .resume-download-btn:hover {
@@ -185,6 +185,8 @@
     overflow: hidden;
     transform: translateY(20px);
     transition: transform 0.3s ease;
+    pointer-events: auto;
+    z-index: 1001; // Ensure modal content is above other elements
   }
   
   .resume-modal.active .resume-modal-content {
@@ -223,6 +225,7 @@
   
   .resume-modal-body {
     padding: 25px;
+    pointer-events: auto;
   }
   
   .resume-modal-body p {
@@ -234,6 +237,7 @@
   /* Form */
   .resume-form-group {
     margin-bottom: 25px;
+    pointer-events: auto;
   }
   
   .resume-form-row {
@@ -261,12 +265,18 @@
     border-radius: 6px;
     font-size: 15px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #ffffff; // Add explicit background color
+    color: #333; // Add explicit text color
+    pointer-events: auto; // Ensure inputs are interactive
+    opacity: 1; // Ensure full opacity
+    z-index: 1; // Ensure inputs are above any overlays
   }
   
   .resume-form-col input:focus {
     outline: none;
     border-color: #3a7bd5;
     box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.1);
+    background-color: #ffffff; // Maintain background on focus
   }
   
   .resume-form-actions {
@@ -323,8 +333,8 @@
     }
     
     .resume-download-container {
-      bottom: 20px;
-      right: 20px;
+      top: 15px;    // Slightly closer to top on mobile
+      right: 40px; // Slightly adjust for mobile while maintaining the inset
     }
     
     .resume-download-btn {
