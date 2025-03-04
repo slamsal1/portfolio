@@ -1,22 +1,36 @@
 <div class="container-fluid justify-content-center">
     <!-- Adobe DC Viewer Container -->
     <div id="adobe-dc-view" style="width: 100%; height: 100vh;"></div>
-    <!-- Simple Download Button at the top of the page -->
+    
+    <!-- Sleek Download Button -->
     <div class="resume-download-container">
-      <button id="resume-download-btn" class="resume-download-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+      <button id="resume-download-btn" class="resume-download-btn" aria-label="Download Resume">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
           <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
         </svg>
-        Download Resume
       </button>
     </div>
+    
+    <!-- Verification Overlay -->
+    <div id="verification-overlay" class="verification-overlay">
+      <div class="verification-status-container">
+        <div id="verification-spinner" class="verification-spinner"></div>
+        <div id="verification-status" class="verification-status">Verifying...</div>
+      </div>
+    </div>
+    
     <!-- Download Modal -->
-    <div id="resume-download-modal" class="resume-modal" style="display: none;">
+    <div id="resume-download-modal" class="resume-modal">
       <div class="resume-modal-content">
         <div class="resume-modal-header">
           <h3>Download Resume</h3>
-          <button type="button" class="resume-modal-close" id="resume-modal-close">&times;</button>
+          <button type="button" class="resume-modal-close" id="resume-modal-close" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
         <div class="resume-modal-body">
           <p>Please provide your details to download the resume.</p>
@@ -39,12 +53,9 @@
                 </div>
               </div>
             </div>
-            <div class="resume-verification-container">
-              <div id="resume-verification-status">Verifying...</div>
-            </div>
             <div class="resume-form-actions">
-              <button type="submit" id="resume-submit-btn" disabled>Submit & Download</button>
-              <button type="button" id="resume-skip-btn" disabled>Skip & Download</button>
+              <button type="submit" id="resume-submit-btn" class="primary-btn">Submit & Download</button>
+              <button type="button" id="resume-skip-btn" class="secondary-btn">Skip & Download</button>
             </div>
           </form>
         </div>

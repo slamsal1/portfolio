@@ -40,28 +40,118 @@
 
 //Download button
 
-/* Download button */
-.resume-download-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Document Viewer */
+  #adobe-dc-view {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+  
+  /* Download button */
+  .resume-download-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
     z-index: 100;
   }
+  
   .resume-download-btn {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background-color: #3a7bd5;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    background-color: rgba(58, 123, 213, 0.7);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    opacity: 0.6;
   }
+  
   .resume-download-btn:hover {
-    background-color: #2a5db2;
+    background-color: rgba(58, 123, 213, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    opacity: 1;
   }
+  
+  .resume-download-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Verification Overlay */
+  .verification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .verification-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .verification-status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .verification-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(58, 123, 213, 0.2);
+    border-radius: 50%;
+    border-top-color: #3a7bd5;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .verification-status {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+  }
+  
+  .verification-status.success {
+    color: #2ecc71;
+  }
+  
+  .verification-status.error {
+    color: #e74c3c;
+  }
+  
   /* Modal */
   .resume-modal {
     position: fixed;
@@ -69,97 +159,176 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
+  
+  .resume-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
   .resume-modal-content {
     background-color: white;
     width: 90%;
-    max-width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
   }
+  
+  .resume-modal.active .resume-modal-content {
+    transform: translateY(0);
+  }
+  
   .resume-modal-header {
-    padding: 15px 20px;
+    padding: 20px 25px;
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+  
   .resume-modal-header h3 {
     margin: 0;
+    font-size: 20px;
+    color: #333;
   }
+  
   .resume-modal-close {
     background: none;
     border: none;
-    font-size: 24px;
+    color: #777;
     cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
   }
+  
+  .resume-modal-close:hover {
+    color: #333;
+  }
+  
   .resume-modal-body {
-    padding: 20px;
+    padding: 25px;
   }
+  
+  .resume-modal-body p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
   /* Form */
   .resume-form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
+  
   .resume-form-row {
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 15px;
+    margin-bottom: 20px;
   }
+  
   .resume-form-col {
     flex: 1;
   }
-  .full-width {
-    width: 100%;
-  }
+  
   .resume-form-col label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-weight: 500;
+    color: #555;
+    font-size: 14px;
   }
+  
   .resume-form-col input {
     width: 100%;
-    padding: 8px 12px;
+    padding: 12px 15px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
-  .resume-verification-container {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 4px;
-    text-align: center;
-    margin-bottom: 20px;
+  
+  .resume-form-col input:focus {
+    outline: none;
+    border-color: #3a7bd5;
+    box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.1);
   }
+  
   .resume-form-actions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
+  
   .resume-form-actions button {
-    padding: 10px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
+  
   .resume-form-actions button:disabled {
     opacity: 0.7;
     cursor: not-allowed;
   }
-  .resume-form-actions button[type="submit"] {
+  
+  .primary-btn {
     background-color: #3a7bd5;
     color: white;
   }
-  .resume-form-actions button[type="button"] {
-    background-color: #f1f1f1;
-    color: #333;
+  
+  .primary-btn:hover:not(:disabled) {
+    background-color: #2a69c2;
+    transform: translateY(-1px);
   }
+  
+  .secondary-btn {
+    background-color: #f5f5f5;
+    color: #555;
+  }
+  
+  .secondary-btn:hover:not(:disabled) {
+    background-color: #e9e9e9;
+  }
+  
+  /* Hidden Turnstile container */
+  #cf-turnstile-container {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
   @media (max-width: 768px) {
     .resume-form-row {
       flex-direction: column;
+      gap: 20px;
+    }
+    
+    .resume-download-container {
+      bottom: 20px;
+      right: 20px;
+    }
+    
+    .resume-download-btn {
+      width: 50px;
+      height: 50px;
     }
   }
